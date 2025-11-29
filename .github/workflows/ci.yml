@@ -31,10 +31,10 @@ jobs:
       run: dotnet restore CandidateSelectionSystem.csproj
     
     - name: Build application
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build CandidateSelectionSystem.csproj --no-restore --configuration Release
     
     - name: Run tests
-      run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
+      run: dotnet test CandidateSelectionSystem.csproj --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
     
     - name: Code quality analysis
       run: |
@@ -42,7 +42,7 @@ jobs:
         echo "Code quality checks completed"
     
     - name: Publish application
-      run: dotnet publish --no-build --configuration Release --output ./artifacts
+      run: dotnet publish CandidateSelectionSystem.csproj --no-build --configuration Release --output ./artifacts
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4

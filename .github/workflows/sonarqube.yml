@@ -51,6 +51,7 @@ jobs:
       run: dotnet restore CandidateSelectionSystem.csproj
     
     - name: Begin SonarQube analysis
+      if: env.SONAR_TOKEN != ''
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -59,26 +60,29 @@ jobs:
           /k:"candidate-selection-system" \
           /o:"your-organization" \
           /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
+          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
           /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml \
           /d:sonar.exclusions="**/bin/**,**/obj/**,**/*.js,**/*.css"
     
     - name: Build and test
       run: |
-        dotnet build --no-restore --configuration Release
-        dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --results-directory ./TestResults/
+        dotnet build CandidateSelectionSystem.csproj --no-restore --configuration Release
+        dotnet test CandidateSelectionSystem.csproj --no-build --configuration Release --collect:"XPlat Code Coverage" --results-directory ./TestResults/
     
     - name: Generate coverage report
+      if: env.SONAR_TOKEN != ''
       run: |
-        dotnet coverage merge ./TestResults/**/*.cobertura.xml --recursive --output coverage.xml --output-format xml
+        dotnet coverage merge ./TestResults/**/*.cobertura.xml --recursive --output coverage.xml --output-format xml || echo "No coverage files found"
     
     - name: End SonarQube analysis
+      if: env.SONAR_TOKEN != ''
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
     
     - name: Upload coverage to Codecov
+      if: env.SONAR_TOKEN != ''
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
