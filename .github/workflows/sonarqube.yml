@@ -48,7 +48,7 @@ jobs:
         dotnet tool install --global dotnet-coverage
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore CandidateSelectionSystem.csproj
     
     - name: Begin SonarQube analysis
       env:
