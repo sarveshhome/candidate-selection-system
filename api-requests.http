@@ -1,0 +1,195 @@
+### Health Check - Built-in
+GET http://localhost:5000/health
+
+###
+
+### Health Check - Ready
+GET http://localhost:5000/health/ready
+
+###
+
+### Health Check - Live
+GET http://localhost:5000/health/live
+
+###
+
+### Health Check - Custom API
+GET http://localhost:5000/api/health
+
+###
+
+### Health Check - Detailed API
+GET http://localhost:5000/api/health/detailed
+
+###
+
+### Get all students
+GET http://localhost:5000/api/student
+
+###
+
+### Add single student - General category
+POST http://localhost:5000/api/student
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "category": "GEN",
+  "gender": "M",
+  "marks": 85
+}
+
+###
+
+### Add single student - OBC category
+POST http://localhost:5000/api/student
+Content-Type: application/json
+
+{
+  "name": "Priya Sharma",
+  "category": "OBC",
+  "gender": "F",
+  "marks": 92
+}
+
+###
+
+### Add single student - SCST category
+POST http://localhost:5000/api/student
+Content-Type: application/json
+
+{
+  "name": "shyam Kumar",
+  "category": "SCST",
+  "gender": "M",
+  "marks": 78
+}
+
+###
+
+### Add batch of students
+POST http://localhost:5000/api/student/batch
+Content-Type: application/json
+
+[
+  {
+    "name": "Alice Johnson",
+    "category": "GEN",
+    "gender": "F",
+    "marks": 88
+  },
+  {
+    "name": "Bob Smith",
+    "category": "OBC",
+    "gender": "M",
+    "marks": 82
+  },
+  {
+    "name": "Carol Brown",
+    "category": "SCST",
+    "gender": "F",
+    "marks": 95
+  },
+  {
+    "name": "David Wilson",
+    "category": "GEN",
+    "gender": "M",
+    "marks": 76
+  },
+  {
+    "name": "Eva Davis",
+    "category": "OBC",
+    "gender": "F",
+    "marks": 89
+  },
+  {
+    "name": "Frank Miller",
+    "category": "GEN",
+    "gender": "M",
+    "marks": 91
+  },
+  {
+    "name": "Grace Lee",
+    "category": "SCST",
+    "gender": "F",
+    "marks": 87
+  },
+  {
+    "name": "Henry Taylor",
+    "category": "OBC",
+    "gender": "M",
+    "marks": 79
+  },
+  {
+    "name": "Ivy Chen",
+    "category": "GEN",
+    "gender": "F",
+    "marks": 93
+  },
+  {
+    "name": "Jack Brown",
+    "category": "SCST",
+    "gender": "M",
+    "marks": 84
+  },
+  {
+    "name": "Kate Singh",
+    "category": "OBC",
+    "gender": "F",
+    "marks": 96
+  },
+  {
+    "name": "Liam Jones",
+    "category": "GEN",
+    "gender": "M",
+    "marks": 73
+  },
+  {
+    "name": "Maya Patel",
+    "category": "SCST",
+    "gender": "F",
+    "marks": 90
+  },
+  {
+    "name": "Noah Kumar",
+    "category": "OBC",
+    "gender": "M",
+    "marks": 86
+  },
+  {
+    "name": "Olivia White",
+    "category": "GEN",
+    "gender": "F",
+    "marks": 81
+  },
+  {
+    "name": "Paul Gupta",
+    "category": "SCST",
+    "gender": "M",
+    "marks": 77
+  },
+  {
+    "name": "Quinn Shah",
+    "category": "OBC",
+    "gender": "F",
+    "marks": 94
+  },
+  {
+    "name": "Ryan Clark",
+    "category": "GEN",
+    "gender": "M",
+    "marks": 80
+  },
+  {
+    "name": "Sara Reddy",
+    "category": "SCST",
+    "gender": "F",
+    "marks": 92
+  },
+  {
+    "name": "Tom Anderson",
+    "category": "GEN",
+    "gender": "M",
+    "marks": 75
+  }
+]
