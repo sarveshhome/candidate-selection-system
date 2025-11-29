@@ -53,7 +53,7 @@ jobs:
         echo "Version: ${VERSION}"
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore CandidateSelectionSystem.csproj
     
     - name: Build application
       run: dotnet build --no-restore --configuration Release -p:Version=${{ steps.version.outputs.version }}
