@@ -45,6 +45,10 @@ public class HealthController : ControllerBase
     [HttpGet("detailed")]
     public async Task<IActionResult> GetDetailed()
     {
+        var databaseCheck = await CheckDatabase();
+        var memoryCheck = CheckMemory();
+        var uptimeCheck = GetUptime();
+        
         var health = new
         {
             status = "Healthy",
@@ -53,13 +57,13 @@ public class HealthController : ControllerBase
             environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development",
             checks = new
             {
-                database = await CheckDatabase(),
-                memory = CheckMemory(),
-                uptime = GetUptime()
+                database = databaseCheck,
+                memory = memoryCheck,
+                uptime = uptimeCheck
             }
         };
 
-        var isHealthy = health.checks.database.status == "Healthy";
+        var isHealthy = ((dynamic)databaseCheck).status == "Healthy";
         return isHealthy ? Ok(health) : StatusCode(503, health);
     }
 
