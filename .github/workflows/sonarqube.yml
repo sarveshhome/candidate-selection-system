@@ -82,6 +82,7 @@ jobs:
       run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
     
     - name: Upload coverage to Codecov
+      if: env.SONAR_TOKEN != ''
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
